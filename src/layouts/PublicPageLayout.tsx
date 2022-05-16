@@ -16,9 +16,7 @@ export const PublicPageLayout: React.FC<{ children: React.ReactNode }> = ({
             <a className="relative inline-block w-24">
               <img
                 src={`${
-                  process.env.NEXT_PUBLIC_BASE_PATH
-                    ? "/" + process.env.NEXT_PUBLIC_BASE_PATH
-                    : ""
+                  process.env.NEXT_PUBLIC_BASE_PATH || ""
                 }/LegalIt-logo.jpg`}
                 alt="logo image"
               />
