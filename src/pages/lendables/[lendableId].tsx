@@ -37,6 +37,19 @@ export const PropertyDetailPage: AppPage = () => {
       </Head>
 
       <section className="prose dark:prose-invert">
+        <span className="text-xs">
+          Check it out on{" "}
+          <a
+            href="https://hashscan.io/#/testnet/transaction/0.0.34750577-1652729775-189663311"
+            target="_blank"
+            rel="nofollow noreferrer"
+            className="link link-secondary"
+          >
+            <span className="material-icons mr-1 text-sm">query_stats</span>
+            HashScan
+          </a>
+        </span>
+
         <h1>{lendable.name}</h1>
 
         {lendable.marketplaceImageUrl ? (
@@ -52,31 +65,33 @@ export const PropertyDetailPage: AppPage = () => {
         </a>
 
         {lendable.textContent ? (
-          <ReactMarkdown className="p-4 border border-primary rounded-lg">
-            {lendable.textContent}
-          </ReactMarkdown>
+          <ReactMarkdown className="p-4">{lendable.textContent}</ReactMarkdown>
         ) : null}
 
         {lendable.description ? <p>{lendable.description}</p> : null}
       </section>
 
-      <section className="mt-8 w-full max-w-3xl prose dark:prose-invert p-8 border border-secondary rounded-lg">
+      <div className="divider"></div>
+
+      <section className="mt-8 w-full max-w-3xl prose dark:prose-invert p-2">
         <h3>Monetization</h3>
 
         {lendable.monetizationOption === "singlePayment" ? (
           <p>
             One time payment of <code>{lendable.oneTimeFee}</code>
-            <span className="kbd kbd-xs">NEO</span>
+            <span className="kbd kbd-xs">TINYBAR</span>
           </p>
         ) : (
           <p>
             Monthly fee of <code>{lendable.subscriptionFee}</code>
-            <span className="kbd kbd-xs">NEO</span>
+            <span className="kbd kbd-xs">TINYBAR</span>
           </p>
         )}
       </section>
 
-      <section className="mt-8 w-full max-w-3xl prose dark:prose-invert p-8 border border-accent rounded-lg">
+      <div className="divider"></div>
+
+      <section className="mt-8 w-full max-w-3xl prose dark:prose-invert p-2">
         <h3>Usage</h3>
 
         <p>

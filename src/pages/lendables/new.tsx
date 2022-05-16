@@ -90,6 +90,7 @@ export const NewLendablePage: AppPage = () => {
               className="max-w-sm"
               name="name"
               label="Display name"
+              autoComplete="off"
               registerOptions={{
                 required: {
                   value: true,
@@ -129,6 +130,8 @@ export const NewLendablePage: AppPage = () => {
                 name="textContent"
                 label="Text content"
                 placeholder="e.g. Step 1: Add ..., Step 2: ???, Step 3: Profit"
+                rows={5}
+                showOptionalLabel
                 registerOptions={{
                   required: {
                     value: true,
@@ -226,7 +229,7 @@ export const NewLendablePage: AppPage = () => {
                   <>
                     {input}
                     <span>
-                      <span className="kbd kbd-xs">NEO</span>
+                      <span className="kbd kbd-xs">TINYBAR</span>
                     </span>
                   </>
                 )}

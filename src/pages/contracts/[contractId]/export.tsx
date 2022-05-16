@@ -7,9 +7,9 @@ import { applyPrivatePageLayout } from "@src/layouts/PrivatePageLayout";
 
 export const ExportTagPage: AppPage = () => {
   const router = useRouter();
-  const { chainId } = router.query as { chainId: string };
+  const { contractId } = router.query as { contractId: string };
 
-  const generatedLink = `https://${window.location.host}/chains/${chainId}`;
+  const generatedLink = `https://${window.location.host}/contracts/${contractId}`;
 
   return (
     <div className="flex flex-col items-center">
@@ -29,7 +29,7 @@ export const ExportTagPage: AppPage = () => {
       </a>
 
       <div className="mt-8 flex flex-row justify-end">
-        <Link href={`/chains/${chainId}`}>
+        <Link href={`/contracts/${contractId}`}>
           <a className="btn btn-ghost">Back to tag</a>
         </Link>
 

@@ -16,7 +16,7 @@ class MyDocument extends Document {
     return (
       <Html className="bg-slate-50">
         <Head>
-          <meta name="description" content="Neo hackathon" />
+          <meta name="description" content="Hedera22 Hackathon" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"

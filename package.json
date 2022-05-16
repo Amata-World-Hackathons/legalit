@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hashgraph/hethers": "^1.1.0",
     "@hashgraph/sdk": "^2.13.1",
     "classnames": "^2.3.1",
     "firebase": "^9.7.0",

@@ -20,33 +20,9 @@ export const DashboardPage: AppPage = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <section className="mt-8 w-full max-w-3xl p-4 border border-primary rounded-lg">
-        <div className="prose dark:prose-invert">
-          <h2>Your IP Chains</h2>
-        </div>
-
-        {yourChains.length > 0 ? (
-          <ul className="mt-4 p-4 bg-white">
-            {yourChains.map((chain) => (
-              <li key={chain.id} className="">
-                <Link href={`/chains/${chain.id}`}>
-                  <a>{chain.name}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : null}
-
-        <div className="mt-8 flex flex-row justify-end">
-          <Link href="/chains/new">
-            <a className="btn btn-primary">New IP Chain</a>
-          </Link>
-        </div>
-      </section>
-
       <section className="mt-16 w-full max-w-3xl p-4 border border-primary rounded-lg">
         <div className="prose dark:prose-invert">
-          <h2>Your lendables</h2>
+          <h2>Your Lendables</h2>
         </div>
 
         {yourLendables.length > 0 ? (
@@ -64,6 +40,30 @@ export const DashboardPage: AppPage = () => {
         <div className="mt-8 flex flex-row justify-end">
           <Link href="/lendables/new">
             <a className="btn btn-primary">New lendable</a>
+          </Link>
+        </div>
+      </section>
+
+      <section className="mt-8 w-full max-w-3xl p-4 border border-primary rounded-lg">
+        <div className="prose dark:prose-invert">
+          <h2>Your Contracts</h2>
+        </div>
+
+        {yourChains.length > 0 ? (
+          <ul className="mt-4 p-4 bg-white">
+            {yourChains.map((chain) => (
+              <li key={chain.id} className="">
+                <Link href={`/contracts/${chain.id}`}>
+                  <a>{chain.name}</a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
+        <div className="mt-8 flex flex-row justify-end">
+          <Link href="/contracts/new">
+            <a className="btn btn-primary">New Contract</a>
           </Link>
         </div>
       </section>

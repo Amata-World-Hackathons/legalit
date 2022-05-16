@@ -13,8 +13,15 @@ export const PublicPageLayout: React.FC<{ children: React.ReactNode }> = ({
       <header className="flex flex-row justify-between pr-4 bg-primary mb-8">
         <div className="flex flex-row items-center">
           <Link href="/">
-            <a className="relative inline-block w-24 h-16">
-              <img src="/LegalIt-logo.jpg" alt="logo image" />
+            <a className="relative inline-block w-24">
+              <img
+                src={`${
+                  process.env.NEXT_PUBLIC_BASE_PATH
+                    ? "/" + process.env.NEXT_PUBLIC_BASE_PATH
+                    : ""
+                }/LegalIt-logo.jpg`}
+                alt="logo image"
+              />
             </a>
           </Link>
 
@@ -23,7 +30,7 @@ export const PublicPageLayout: React.FC<{ children: React.ReactNode }> = ({
           </Link>
 
           <Link href="/">
-            <a className="ml-4 btn btn-ghost">IP Chains</a>
+            <a className="ml-4 btn btn-ghost">Contracts</a>
           </Link>
         </div>
 

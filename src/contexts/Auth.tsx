@@ -19,7 +19,11 @@ const login = (email: string, password: string) => {
   return signInWithEmailAndPassword(firebaseAuth, email, password);
 };
 
-const logout = () => signOut(firebaseAuth).then(() => window.location.reload());
+const logout = () =>
+  signOut(firebaseAuth).then(() => {
+    localStorage.clear();
+    window.location.reload();
+  });
 
 interface Profile {
   bio: string;
@@ -28,7 +32,6 @@ interface Profile {
   legalName: string;
   displayName: string;
   isComplete: boolean;
-  neoAddress: string;
 }
 
 export interface AuthResult {
@@ -153,5 +156,5 @@ export const MustAuthProvider: React.FC<MustAuthProviderProps> = ({
 };
 
 export function isProfileComplete(profile?: Partial<Profile>): boolean {
-  return !!(profile?.legalName && profile?.neoAddress);
+  return !!profile?.legalName;
 }

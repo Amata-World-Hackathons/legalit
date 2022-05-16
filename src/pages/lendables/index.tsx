@@ -4,7 +4,7 @@ import { Preloader } from "@src/components/progress/Preloader";
 import Link from "next/link";
 import Head from "next/head";
 import { AddLendableToListButton } from "@src/components/AddLendableToListButton";
-import { COLLECTION_LENDABLES } from "@src/constants";
+import { COLLECTION_LENDABLES, PLACEHOLDER_IMAGE_SRC } from "@src/constants";
 
 import styles from "@src/utils.module.css";
 
@@ -27,16 +27,10 @@ export const LendablesIndexPage: AppPage = () => {
 
       <div className="mt-8 flex flex-row flex-wrap max-w-6xl justify-around">
         {lendables.map((lendable) => (
-          <div
-            key={lendable.id}
-            className="card w-80 mx-4 my-4 border border-primary"
-          >
+          <div key={lendable.id} className="card w-80 mx-4 my-4">
             <figure>
               <img
-                src={
-                  lendable.marketplaceImageUrl ||
-                  "https://via.placeholder.com/300x300/000000/FFFFFF?text=Image+not+available"
-                }
+                src={lendable.marketplaceImageUrl || PLACEHOLDER_IMAGE_SRC}
                 alt={`Storefront image for ${lendable.name}`}
               />
             </figure>
@@ -51,7 +45,7 @@ export const LendablesIndexPage: AppPage = () => {
                 {lendable.description || "N/A"}
               </p>
 
-              <div className="card-actions justify-end">
+              <div className="card-actions justify-end mt-4">
                 <AddLendableToListButton lendableId={lendable.id} />
               </div>
             </div>
@@ -59,7 +53,7 @@ export const LendablesIndexPage: AppPage = () => {
         ))}
       </div>
 
-      <div className="p-4 border border-primary mt-16 rounded-lg">
+      <div className="p-4 border border-primary mt-16 rounded-sm w-full max-w-3xl flex flex-row justify-end">
         <Link href="/lendables/new">
           <a className="btn btn-ghost">New lendable</a>
         </Link>

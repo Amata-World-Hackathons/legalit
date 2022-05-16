@@ -1,5 +1,9 @@
 import FormField, { TextareaFormField } from "@src/components/forms/FormField";
-import { COLLECTION_CHAINS, COLLECTION_LENDABLES } from "@src/constants";
+import {
+  COLLECTION_CHAINS,
+  COLLECTION_LENDABLES,
+  PLACEHOLDER_IMAGE_SRC,
+} from "@src/constants";
 import { useMustAuth } from "@src/contexts/Auth";
 import { useFirestore, useFirestoreCollection } from "@src/contexts/Firebase";
 import { applyPrivatePageLayout } from "@src/layouts/PrivatePageLayout";
@@ -36,7 +40,7 @@ export const NewTagPage: AppPage = () => {
   return (
     <div className="w-full max-w-3xl m-auto">
       <div className="prose dark:prose-invert">
-        <h1>New IP Chain</h1>
+        <h1>New Contract</h1>
       </div>
 
       <FormProvider {...methods}>
@@ -53,7 +57,7 @@ export const NewTagPage: AppPage = () => {
               })),
             });
 
-            router.push(`/chains/${doc.id}`);
+            router.push(`/contracts/${doc.id}`);
           })}
         >
           <section className="mt-8 p-8 border border-primary rounded-lg">
@@ -152,7 +156,7 @@ export const NewTagPage: AppPage = () => {
                             <img
                               src={
                                 lendable.marketplaceImageUrl ||
-                                "https://via.placeholder.com/300x300/000000/FFFFFF?text=Image+not+available"
+                                PLACEHOLDER_IMAGE_SRC
                               }
                               alt={`Preview of ${lendable.name}`}
                             />
@@ -165,7 +169,7 @@ export const NewTagPage: AppPage = () => {
                                   href={`/lendables/${lendable.id}`}
                                   target="_blank"
                                   rel="noreferrer nofollow"
-                                  className="link link-primary"
+                                  className="link link-secondary"
                                 >
                                   {lendable.name}
                                 </a>
@@ -207,7 +211,7 @@ export const NewTagPage: AppPage = () => {
 
             <div className="flex flex-row justify-end">
               <span>
-                1000 <span className="kbd kbd-xs">NEO</span>
+                1000 <span className="kbd kbd-xs">TINYBAR</span>
               </span>
             </div>
           </section>
@@ -222,7 +226,7 @@ export const NewTagPage: AppPage = () => {
                 loading: isSubmitting,
               })}
             >
-              Create IP chain
+              Create contract
             </button>
           </div>
         </form>

@@ -17,9 +17,9 @@ import { useRouter } from "next/router";
 export const ChainDetailpage: AppPage = () => {
   const router = useRouter();
   const { user } = useAuth();
-  const { chainId } = router.query as { chainId: string };
+  const { contractId } = router.query as { contractId: string };
 
-  const result = useFirestoreDocument(COLLECTION_CHAINS, chainId);
+  const result = useFirestoreDocument(COLLECTION_CHAINS, contractId);
   const lendablesResult = useFirestoreCollection(COLLECTION_LENDABLES);
 
   if (result.loading) return <Preloader />;
@@ -39,6 +39,19 @@ export const ChainDetailpage: AppPage = () => {
       </Head>
 
       <section className="prose dark:prose-invert">
+        <span className="text-xs">
+          Check it out on{" "}
+          <a
+            href="https://hashscan.io/#/testnet/transaction/0.0.34750577-1652729775-189663311"
+            target="_blank"
+            rel="nofollow noreferrer"
+            className="link link-secondary"
+          >
+            <span className="material-icons mr-1 text-sm">query_stats</span>
+            HashScan
+          </a>
+        </span>
+
         <h1>{chain.name}</h1>
 
         {chain.storefrontImageUrl ? (
@@ -78,7 +91,7 @@ export const ChainDetailpage: AppPage = () => {
 
       <div className="mt-16 flex flex-row justify-end">
         {user?.uid === chain.userId ? (
-          <Link href={`/chains/${chainId}/export`}>
+          <Link href={`/contracts/${contractId}/export`}>
             <a className="btn btn-primary">Get QR code</a>
           </Link>
         ) : null}
