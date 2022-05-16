@@ -28,6 +28,14 @@ interface WalletSessionConfig {
 const hashconnect = new HashConnect();
 const WALLET_SESSION = initSession();
 
+hashconnect.foundExtensionEvent.on((walletMetadata) => {
+  console.log("WALLET FOUND", walletMetadata);
+});
+
+hashconnect.pairingEvent.on((pairingData) => {
+  console.log("PAIRING DATA", pairingData);
+});
+
 export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -54,6 +62,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
     );
 
     hashconnect.findLocalWallets();
+    hashconnect.connectToLocalWallet(pairingString);
 
     setSessionConfig({
       ...sessionConfig,
