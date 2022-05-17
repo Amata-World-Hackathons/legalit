@@ -11,6 +11,7 @@ import { HashConnectProvider } from "hashconnect/dist/provider/provider";
 import { hethers } from "@hashgraph/hethers";
 import { HashConnectSigner } from "hashconnect/dist/provider/signer";
 import { HashConnectConnectionState } from "hashconnect/dist/types";
+import { Client } from "@hashgraph/sdk";
 
 const APP_METADATA: HashConnectTypes.AppMetadata = {
   name: "LegalIt",
@@ -24,6 +25,7 @@ export interface WalletContextValue {
   signer?: HashConnectSigner;
   provider?: HashConnectProvider;
   walletAddress?: string;
+  client: Client;
   connect?: () => Promise<unknown>;
   disconnect?: () => void;
 }
@@ -41,6 +43,7 @@ interface WalletSessionConfig {
 }
 const hashconnect = new HashConnect();
 const WALLET_SESSION = initSession();
+const client = Client.forTestnet();
 
 hashconnect.connectionStatusChange.on((event) => {
   console.log("connect event", event);
@@ -127,7 +130,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [hashconnect, sessionConfig]);
 
   const value = useMemo(() => {
-    if (!sessionConfig.walletAddress) return { connect };
+    if (!sessionConfig.walletAddress) return { client, connect };
 
     const provider = hashconnect.getProvider(
       "testnet",
@@ -143,6 +146,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
     //   });
 
     return {
+      client,
       walletAddress: sessionConfig.walletAddress,
       provider,
       signer,

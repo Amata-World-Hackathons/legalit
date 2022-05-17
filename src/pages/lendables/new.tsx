@@ -13,6 +13,12 @@ import { useAuth } from "@src/contexts/Auth";
 import ReactMarkdown from "react-markdown";
 import { COLLECTION_LENDABLES, PLACEHOLDER_IMAGE_SRC } from "@src/constants";
 
+import ABI from "@src/abi/Lendable.abi.json";
+import BYTECODE from "@src/abi/Lendable.bytecode.json";
+import { useWallet } from "@src/contexts/Wallet";
+import { hethers } from "@hashgraph/hethers";
+import { ContractCreateFlow, TokenCreateTransaction } from "@hashgraph/sdk";
+
 export const NewLendablePage: AppPage = () => {
   const db = useFirestore();
   const router = useRouter();
@@ -38,6 +44,10 @@ export const NewLendablePage: AppPage = () => {
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
+
+  const { client, walletAddress, signer, provider } = useWallet();
+
+  console.log("CLI", client);
 
   const templatesResult = useFirestoreCollection("templates");
 
@@ -75,9 +85,25 @@ export const NewLendablePage: AppPage = () => {
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(async (data) => {
+            const txn = await new TokenCreateTransaction()
+              .setTokenName(data.name)
+              .setTokenSymbol("LIT")
+              .setExpirationTime(
+                new Date(new Date().getTime() + 30 * 60 * 1000)
+              )
+              .setTreasuryAccountId(walletAddress!)
+              .freezeWithSigner(signer!);
+
+            const signedTxn = await txn.signWithSigner(signer!);
+            const res = await signedTxn.execute(client);
+            const rcp = await res.getReceipt(client);
+
+            const contractId = rcp.contractId;
+
             const doc = await addDoc(collection(db, COLLECTION_LENDABLES), {
               ...data,
               userId: user?.uid,
+              contractAddress: contractId,
             });
 
             router.push(`/lendables/${doc.id}`);
